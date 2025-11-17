@@ -55,6 +55,6 @@ EXPOSE 9000
 # or use a dedicated entrypoint script that handles both, but here's the typical structure:
 
 # ENTRYPOINT ["/usr/local/bin/node", "dist/main.js"]
-# CMD ["/usr/local/bin/node", "dist/main.js"]
+CMD ["/usr/local/bin/node", "dist/main.js"]
 # If you need to run migrations first (like your original start.sh), you'd use a script:
-CMD ["sh", "-c", "medusa migrations run && /usr/local/bin/node dist/main.js"]
+# CMD ["sh", "-c", "medusa migrations run && /usr/local/bin/node dist/main.js"]
