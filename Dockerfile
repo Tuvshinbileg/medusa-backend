@@ -44,7 +44,7 @@ COPY --from=builder /server/dist ./dist
 COPY package.json .yarnrc.yml ./
 # 4. Optional: Any necessary config files (e.g., medusa-config.js, .env, public folder)
 # For Medusa, you often need the config file and potentially the 'uploads' folder structure.
-COPY medusa-config.js ./
+# COPY medusa-config.js ./
 # You should manage environment variables separately (e.g., via Kubernetes Secrets or Docker Compose)
 
 # Expose the port Medusa runs on
