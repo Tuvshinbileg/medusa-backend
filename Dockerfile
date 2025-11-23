@@ -1,6 +1,12 @@
+# --- STAGE 1: BUILD ---
 # Development Dockerfile for Medusa
 FROM node:20-alpine
 
+# Enable Corepack
+RUN corepack enable
+
+# Prepare and activate a specific Yarn version
+RUN corepack prepare yarn@4.9.4 --activate
 # Set working directory
 WORKDIR /server
 
