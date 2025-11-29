@@ -6,7 +6,7 @@ FROM node:20-alpine
 RUN corepack enable
 
 # Prepare and activate a specific Yarn version
-RUN corepack prepare yarn@4.9.4 --activate
+RUN yarn install --frozen-lockfile
 # Set working directory
 WORKDIR /server
 
