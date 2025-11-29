@@ -24,6 +24,4 @@ RUN yarn build
 
 # Expose the port Medusa runs on
 EXPOSE 9000
-
-# Start with migrations and then the development server
-CMD ["./start.sh"] CMD ["sh", "-c", "medusa migrations run && /usr/local/bin/node dist/main.js"]
+CMD ["sh", "-c", "medusa migrations run && /usr/local/bin/node dist/main.js"]
