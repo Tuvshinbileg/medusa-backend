@@ -16,8 +16,11 @@ COPY package.json yarn.lock .yarnrc.yml ./
 # Install all dependencies using yarn
 RUN yarn install
 
+
 # Copy source code
 COPY . .
+
+RUN yarn build
 
 # Expose the port Medusa runs on
 EXPOSE 9000
