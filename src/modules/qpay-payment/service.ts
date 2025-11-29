@@ -14,7 +14,7 @@ import { PaymentSessionStatus } from "@medusajs/utils";
 import { AbstractPaymentProvider, MedusaError } from "@medusajs/framework/utils"
 import { Logger } from "@medusajs/framework/types"
 import { Address } from "cluster"
-import { Customer } from "../../../.medusa/types/query-entry-points"
+
 import { AxiosResponse } from "axios"
 import axios from "axios"
 
@@ -140,7 +140,6 @@ interface PaymentContext {
     amount: number
     currency_code: string
     resource_id: string
-    customer?: Customer
     billing_address?: Address
     email?: string
     customer_metadata?: Record<string, any>
