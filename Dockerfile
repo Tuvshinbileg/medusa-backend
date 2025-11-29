@@ -1,6 +1,6 @@
 # --- STAGE 1: BUILD ---
 # Development Dockerfile for Medusa
-FROM node:20-slime
+FROM node:20-alpine
 
 # Enable Corepack
 RUN corepack enable
