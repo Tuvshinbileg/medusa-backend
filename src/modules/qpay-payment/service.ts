@@ -140,6 +140,7 @@ interface PaymentContext {
     amount: number
     currency_code: string
     resource_id: string
+    customer: Record<string, any> | null  
     billing_address?: Address
     email?: string
     customer_metadata?: Record<string, any>
