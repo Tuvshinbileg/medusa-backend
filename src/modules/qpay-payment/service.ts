@@ -237,29 +237,29 @@ class QpayPaymentProviderService extends AbstractPaymentProvider<Options> {
             }
 
             this.logger_.info(`Checking QPay payment status for invoice ID: ${invoiceId}`);
-            // const response: AxiosResponse<QPayPaymentCheckResponse> = await this.qpayClient.post(
-            //     '/v2/payment/check',
-            //     checkRequest
-            // )
-            const response = {
-                data: {
+            
+            if (process.env.NODE_ENV === 'development' || process.env.QPAY_MOCK === 'true') {
+                this.logger_.info("Using mock QPay payment response (DEV MODE)");
+                return {
                     "count": 1,
-                    "paid_amount": 100,
                     "rows": [
                         {
                             "payment_id": "593744473409193",
                             "payment_status": "PAID",
-                            "payment_date": "2020-10-19T08:58:46.641Z",
-                            "payment_fee": "1.00",
-                            "payment_amount": "100.00",
-                            "payment_currency": "MNT",
+                            "payment_amount": 100.00,
                             "payment_wallet": "0fc9b71c-cd87-4ffd-9cac-2279ebd9deb0",
-                            "transaction_type": "P2P"
+                            "payment_currency": "MNT",
+                            "payment_type": "P2P",
+                            "created_date": new Date().toISOString(),
+                            "transaction_id": "TXN-" + Date.now()
                         }
                     ]
                 }
             }
-            this.logger_.info(`QPay payment status response: ${JSON.stringify(response.data)}`);
+            const response: AxiosResponse<QPayPaymentCheckResponse> = await this.qpayClient.post(
+                '/v2/payment/check',
+                checkRequest
+            )       
 
             return response.data
         } catch (error) {
