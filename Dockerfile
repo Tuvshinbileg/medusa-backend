@@ -4,7 +4,7 @@ FROM node:20-alpine
 RUN corepack enable
 
 # Set working directory
-WORKDIR /server
+# WORKDIR /server
 
 # Copy package files first (for better layer caching)
 COPY package.json yarn.lock .yarnrc.yml ./
