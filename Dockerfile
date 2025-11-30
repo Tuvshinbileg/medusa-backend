@@ -4,16 +4,17 @@ FROM node:20-alpine
 RUN corepack enable
 
 # Set working directory
-# WORKDIR /server
+WORKDIR /app
 
 # Copy package files first (for better layer caching)
 COPY package.json yarn.lock .yarnrc.yml ./
 
-# Install dependencies
-RUN yarn install --frozen-lockfile
 
 # Copy source code
 COPY . .
+
+# Install dependencies
+RUN yarn install 
 
 # Build the application
 RUN yarn build
