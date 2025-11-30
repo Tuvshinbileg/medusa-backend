@@ -1,27 +1,29 @@
-# --- STAGE 1: BUILD ---
-# Development Dockerfile for Medusa
 FROM node:20-alpine
 
-# Enable Corepack
+# Enable Corepack for Yarn
 RUN corepack enable
 
-# Prepare and activate a specific Yarn version
-RUN yarn install --frozen-lockfile
 # Set working directory
 WORKDIR /server
 
-# Copy package files and yarn config
+# Copy package files first (for better layer caching)
 COPY package.json yarn.lock .yarnrc.yml ./
 
-# Install all dependencies using yarn
-RUN yarn install
-
+# Install dependencies
+RUN yarn install --frozen-lockfile
 
 # Copy source code
 COPY . .
 
+# Build the application
 RUN yarn build
 
-# Expose the port Medusa runs on
+# Expose Medusa port
 EXPOSE 9000
-CMD ["sh", "-c", "medusa migrations run && /usr/local/bin/node dist/main.js"]
+
+# Run migrations and start server
+CMD ["sh", "-c", "npx medusa db:migrate && yarn predeploy && node dist/main.js"]
+
+# Optional: Add health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:9000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
