@@ -32,6 +32,7 @@ module.exports = defineConfig({
     }
   ],
   projectConfig: {
+    workerMode: process.env.WORKER_MODE || "shared",
     databaseUrl: process.env.DATABASE_URL,
     databaseDriverOptions: {
       ssl: false,
