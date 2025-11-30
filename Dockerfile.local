@@ -22,4 +22,4 @@ RUN yarn build
 EXPOSE 9000
 
 # Run migrations and start server
-CMD ["sh", "-c", "medusa db:migrate"]
+CMD ["sh", "-c", "medusa build && medusa db:migrate  && medusa start"]
