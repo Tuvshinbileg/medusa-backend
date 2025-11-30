@@ -1,6 +1,4 @@
 import { loadEnv, defineConfig } from '@medusajs/framework/utils';
-import { options } from 'axios';
-import { resolve } from 'path';
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd());
 
@@ -32,7 +30,7 @@ module.exports = defineConfig({
     }
   ],
   projectConfig: {
-    workerMode: process.env.WORKER_MODE || "shared",
+    // workerMode: process.env.WORKER_MODE || "shared",
     databaseUrl: process.env.DATABASE_URL,
     databaseDriverOptions: {
       ssl: false,
